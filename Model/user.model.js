@@ -5,11 +5,10 @@ const userSchema = mongoose.Schema({
   password: String,
   role: String,
   token: String,
-  codeKataMarks:Number,
-  webkataMarks:Number,
-  tasksMarks:Number,
-  interviewMarks:Number,
-  tasksDate:Date,
+  frontsmarks:String,
+  backsmarks:String,
+  frontdmarks:String,
+  backdmarks:String,
 });
 const user = mongoose.model('user',userSchema)
 export default user
