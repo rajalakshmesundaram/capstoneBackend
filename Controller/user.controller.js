@@ -100,19 +100,13 @@ export const getalluser=async(req,res)=>{
 export const marksById=async(req,res)=>{
   try {
     const { id } = req.params;
-    const {
-      codeKataMarks,
-      webkataMarks,
-      tasksMarks,
-      interviewMarks,
-      tasksDate,
-    } = req.body;
+    const { frontsmarks, backsmarks, frontdmarks, backdmarks } = req.body;
     const userMarks=await user.findById(id)
-    userMarks.codeKataMarks=codeKataMarks
-    userMarks.webkataMarks=webkataMarks
-    userMarks.tasksMarks=tasksMarks
-    userMarks.interviewMarks=interviewMarks
-    userMarks.tasksDate=tasksDate
+    userMarks.frontsmarks=frontsmarks
+    userMarks.backsmarks=backsmarks
+    userMarks.frontdmarks=frontdmarks
+    userMarks.backdmarks=backdmarks
+    
     await userMarks.save()
 res.status(200).json({ message: userMarks });
   } catch (error) {
