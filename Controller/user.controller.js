@@ -10,7 +10,7 @@ export const createUser= async(req,res)=>{
         const{name, email,password,role}=req.body
          const existingUser = await user.findOne({ email });
          if (existingUser) {
-           return res.status(200).json({ message: "Email already registered" });
+           return res.status(200).json({ message: "user Exist" });
          }
         const hashPassword=await bcrypt.hash(password,10)
         const userRegister= new user({name,email,password:hashPassword,role})
@@ -19,7 +19,7 @@ export const createUser= async(req,res)=>{
         console.log(userRegister);
         res
           .status(200)
-          .json({ message: "Registration successful", user: user });
+          .json({ message: "Successfully Register", user: user });
         
     } catch (error) {
         console.error(err);
@@ -31,11 +31,11 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const userLogin = await user.findOne({ email });
     if (!userLogin) {
-      return res.status(401).json({ message: "user not found" });
+      return res.status(401).json({ message: "Invalid User Name" });
     }
     const passwordMatch = await bcrypt.compare(password, userLogin.password);
     if (!passwordMatch) {
-      return res.status(401).json({ message: "invalid password" });
+      return res.status(401).json({ message: "Invalid Password" });
     }
     const token = jwt.sign({ _id: userLogin._id }, process.env.JWT_SECRET);
     userLogin.token = token;
@@ -49,7 +49,7 @@ export const forgotPassword = async (req, res) => {
   const { email } = req.body;
   const userlogin = await user.findOne({ email});
   if (!userlogin) {
-    return res.status(404).json({ message: "User not found" });
+    return res.status(404).json({ message: "Invalid User Name" });
   }
   const token=jwt.sign({_id:userlogin._id},process.env.JWT_SECRET)
    userlogin.token=token
