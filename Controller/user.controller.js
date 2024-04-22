@@ -55,6 +55,7 @@ export const forgotPassword = async (req, res) => {
    userlogin.token=token
    await userlogin.save()
   mail(email,token);
+  res.status(200).json({ message: "Mail Send Successfully" });
 };
 // Endpoint to handle password reset
 export const resetpassword = async (req, res) => {
