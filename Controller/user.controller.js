@@ -136,16 +136,16 @@ function generateRandomData() {
     task: faker.lorem.word(),
     score: Math.round(Math.random() * 10)({ min: 0, max: 100 }),
   }));
-  const interviewMarks =Math.round(Math.random() * 10)({ min: 0, max: 100 });
-  const webCodeMarks = Math.round(Math.random() * 10)({ min: 0, max: 100 });
-  const capstoneMarks = Math.round(Math.random() * 10)({ min: 0, max: 100 });
+  const interviewMarks =Math.round(Math.random() * 10);
+  const webCodeMarks = Math.round(Math.random() * 10);
+  const capstoneMarks = Math.round(Math.random() * 10);
   const codeKataScores = Array.from({ length: 3 }, () => ({
     day: faker.date.past().toISOString().split("T")[0],
-    score: Math.round(Math.random() * 10)({ min: 0, max: 100 }),
+    score: Math.round(Math.random() * 10),
   }));
   const webKataScores = Array.from({ length: 3 }, () => ({
     day: faker.date.past().toISOString().split("T")[0],
-    score: Math.round(Math.random() * 10)({ min: 0, max: 100 }),
+    score: Math.round(Math.random() * 10),
   }));
 
   return {
