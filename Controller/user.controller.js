@@ -194,23 +194,23 @@ export const saveRandomTaskMarksForUsers=async(req,res)=> {
         
 
         // Loop through each user and generate random task marks
-        for (const user of users) {
+        
             const {taskMarks,interviewMarks,webCodeMarks,capstoneMarks,codeKataScores,webKataScores} = generateRandomData();
 
             // Update user with generated task marks
-            user.taskMarks = taskMarks;
-            user.interviewMarks=interviewMarks;
-            user.webCodeMarks=webCodeMarks;
-            user.capstoneMarks=capstoneMarks;
-            user.codeKataScores=codeKataScores;
-            user.webKataScores=webKataScores;
+            users.taskMarks = taskMarks;
+            users.interviewMarks=interviewMarks;
+            users.webCodeMarks=webCodeMarks;
+            users.capstoneMarks=capstoneMarks;
+            users.codeKataScores=codeKataScores;
+            users.webKataScores=webKataScores;
             // Save user with updated marks
-            await user.save();
-            console.log(`Random task marks saved for user: ${user.username}`);
-            res.status(200).json({ message: user });
+            await users.save();
+            console.log(`Random task marks saved for user: ${users.username}`);
+            res.status(200).json({ message: users });
         }
-    } catch (error) {
+    catch (error) {
         console.error('Error saving random task marks:', error);
          res.status(500).json({ message: "Internal server error" });
     }
-  }
+}
