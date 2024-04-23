@@ -80,7 +80,7 @@ export const resetpassword = async (req, res) => {
 
 export const getUser=async(req,res)=>{
   try{
-  const userId=req.user._id
+  const userId=req.userId
   const userfind=await user.findById(userId)
   res.status(200).json({message:"Authorized user",data:userfind})
   }
@@ -118,7 +118,7 @@ res.status(200).json({ message: userMarks });
 
 export const getUserById = async (req, res) => {
   try {
-    const {userId}=req.params
+    const { userId } = req.params;
     const userid = await user.findById(userId);
     if (!userid) {
       return res.status(404).json({ message: "Studemt not found" });
