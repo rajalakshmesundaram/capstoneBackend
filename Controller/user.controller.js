@@ -3,6 +3,7 @@ import user from "../Model/user.model.js"
 import mail from "../Service/nodemailer.js"
 import jwt from "jsonwebtoken"
 import dotenv from 'dotenv'
+import { faker } from "@faker-js/faker"
 
 dotenv.config()
 export const createUser= async(req,res)=>{
@@ -90,8 +91,8 @@ export const getUser=async(req,res)=>{
 }
 export const getalluser=async(req,res)=>{
   try {
-
-    const users = await user.find({ role: "Student" })
+    const userId=req.user._id
+    const users = await user.findById(userId)
     res.status(200).json({message:users});
   } catch (error) {
     console.error(error);
@@ -129,4 +130,85 @@ export const getUserById = async (req, res) => {
   }
 };
 
+function generateRandomData() {
+  // Generate random data
+  const codeKataScores = Array.from({ length: 3 }, () => ({
+    day: faker.date.past().toISOString().split("T")[0], // Random past date
+    score: faker.Math.round(Math.random() * 10).number({ min: 0, max: 100 }),
+  }));
 
+  const webKataScores = Array.from({ length: 3 }, () => ({
+    day: faker.date.past().toISOString().split("T")[0], // Random past date
+    score: faker.Math.round(Math.random() * 10).number({ min: 0, max: 100 }),
+  }));
+  const interviewMarks = faker.Math.round(Math.random() * 10).number({ min: 0, max: 100 });
+  const capstoneMarks = faker.Math.round(Math.random() * 10)({ min: 0, max: 100 });
+  const webCodeMarks = faker.Math.round(Math.random() * 10)({ min: 0, max: 100 });
+
+  const defaultData = [
+    { task: "Task 1", score: 9 },
+    { task: "Task 2", score: 10 },
+    { task: "Task 3", score: 10 },
+    { task: "Task 4", score: 10 },
+    { task: "Task 5", score: 9 },
+    { task: "Task 6", score: 10 },
+    { task: "Task 7", score: 10 },
+    { task: "Task 8", score: 9 },
+    { task: "Task 9", score: 10 },
+    { task: "Task 10", score: 10 },
+    { task: "Task 11", score: 10 },
+    { task: "Task 12", score: 10 },
+    { task: "Task 13", score: 9 },
+    { task: "Task 14", score: 10 },
+    { task: "Task 15", score: 10 },
+    { task: "Task 16", score: 10 },
+    { task: "Task 17", score: 9 },
+    { task: "Task 18", score: 10 },
+    { task: "Task 19", score: 10 },
+    { task: "Task 20", score: 9 },
+    { task: "Task 21", score: 10 },
+    { task: "Task 22", score: 10 },
+    { task: "Task 23", score: 10 },
+    { task: "Task 25", score: 10 },
+    { task: "Task 26", score: 9 },
+    { task: "Task 27", score: 10 },
+    { task: "Task 28", score: 10 },
+    { task: "Task 29", score: 9 },
+  ];
+
+ 
+    // Select a random task from the default data
+    const randomTask = faker.Math.round(Math.random() * 10).arrayElement(defaultData);
+
+    // Return the score for the selected task
+   
+
+  // Return generated data
+  return { codeKataScores, webKataScores ,randomTask,interviewMarks,capstoneMarks,webCodeMarks};
+}
+export const saveRandomTaskMarksForUsers=async(req,res)=> {
+    try {
+        // Retrieve users from the database (assuming you already have users)
+        const { userId } = req.params;
+        const users = await user.findById(userId);
+        
+
+        // Loop through each user and generate random task marks
+        for (const user of users) {
+            const {taskMarks,interviewMarks,webCodeMarks,capstoneMarks,codeKataScores,webKataScores} = generateRandomData();
+
+            // Update user with generated task marks
+            user.taskMarks = taskMarks;
+            user.interviewMarks=interviewMarks;
+            user.webCodeMarks=webCodeMarks;
+            user.capstoneMarks=capstoneMarks;
+            user.codeKataScores=codeKataScores;
+            user.webKataScores=webKataScores;
+            // Save user with updated marks
+            await user.save();
+            console.log(`Random task marks saved for user: ${user.username}`);
+        }
+    } catch (error) {
+        console.error('Error saving random task marks:', error);
+    }
+  }
