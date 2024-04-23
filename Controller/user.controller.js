@@ -91,7 +91,7 @@ export const getUser=async(req,res)=>{
 }
 export const getalluser=async(req,res)=>{
   try {
-    const userId=req.user._id
+     const { userId } = req.params;
     const users = await user.findById(userId)
     res.status(200).json({message:users});
   } catch (error) {
