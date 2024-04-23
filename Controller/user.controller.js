@@ -134,18 +134,18 @@ function generateRandomData() {
   // Generate random data
   const taskMarks = Array.from({ length: 30 }, () => ({
     task: faker.lorem.word(),
-    score: faker.Math.round(Math.random() * 10)({ min: 0, max: 100 }),
+    score: Math.round(Math.random() * 10)({ min: 0, max: 100 }),
   }));
-  const interviewMarks = faker.Math.round(Math.random() * 10)({ min: 0, max: 100 });
-  const webCodeMarks = faker.Math.round(Math.random() * 10)({ min: 0, max: 100 });
-  const capstoneMarks = faker.Math.round(Math.random() * 10)({ min: 0, max: 100 });
+  const interviewMarks =Math.round(Math.random() * 10)({ min: 0, max: 100 });
+  const webCodeMarks = Math.round(Math.random() * 10)({ min: 0, max: 100 });
+  const capstoneMarks = Math.round(Math.random() * 10)({ min: 0, max: 100 });
   const codeKataScores = Array.from({ length: 3 }, () => ({
     day: faker.date.past().toISOString().split("T")[0],
-    score: faker.Math.round(Math.random() * 10)({ min: 0, max: 100 }),
+    score: Math.round(Math.random() * 10)({ min: 0, max: 100 }),
   }));
   const webKataScores = Array.from({ length: 3 }, () => ({
     day: faker.date.past().toISOString().split("T")[0],
-    score: faker.Math.round(Math.random() * 10)({ min: 0, max: 100 }),
+    score: Math.round(Math.random() * 10)({ min: 0, max: 100 }),
   }));
 
   return {
