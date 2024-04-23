@@ -3,7 +3,7 @@ import user from "../Model/user.model.js"
 import mail from "../Service/nodemailer.js"
 import jwt from "jsonwebtoken"
 import dotenv from 'dotenv'
-import { faker } from "@faker-js/faker"
+import { fa, faker } from "@faker-js/faker"
 
 dotenv.config()
 export const createUser= async(req,res)=>{
@@ -132,60 +132,32 @@ export const getUserById = async (req, res) => {
 
 function generateRandomData() {
   // Generate random data
-  const codeKataScores = Array.from({ length: 3 }, () => ({
-    day: faker.date.past().toISOString().split("T")[0], // Random past date
-    score: faker.Math.round(Math.random() * 10).number({ min: 0, max: 100 }),
+  const taskMarks = Array.from({ length: 30 }, () => ({
+    task: faker.lorem.word(),
+    score: faker.Math.round(Math.random() * 10)({ min: 0, max: 100 }),
   }));
-
-  const webKataScores = Array.from({ length: 3 }, () => ({
-    day: faker.date.past().toISOString().split("T")[0], // Random past date
-    score: faker.Math.round(Math.random() * 10).number({ min: 0, max: 100 }),
-  }));
-  const interviewMarks = faker.Math.round(Math.random() * 10).number({ min: 0, max: 100 });
-  const capstoneMarks = faker.Math.round(Math.random() * 10)({ min: 0, max: 100 });
+  const interviewMarks = faker.Math.round(Math.random() * 10)({ min: 0, max: 100 });
   const webCodeMarks = faker.Math.round(Math.random() * 10)({ min: 0, max: 100 });
+  const capstoneMarks = faker.Math.round(Math.random() * 10)({ min: 0, max: 100 });
+  const codeKataScores = Array.from({ length: 3 }, () => ({
+    day: faker.date.past().toISOString().split("T")[0],
+    score: faker.Math.round(Math.random() * 10)({ min: 0, max: 100 }),
+  }));
+  const webKataScores = Array.from({ length: 3 }, () => ({
+    day: faker.date.past().toISOString().split("T")[0],
+    score: faker.Math.round(Math.random() * 10)({ min: 0, max: 100 }),
+  }));
 
-  const defaultData = [
-    { task: "Task 1", score: 9 },
-    { task: "Task 2", score: 10 },
-    { task: "Task 3", score: 10 },
-    { task: "Task 4", score: 10 },
-    { task: "Task 5", score: 9 },
-    { task: "Task 6", score: 10 },
-    { task: "Task 7", score: 10 },
-    { task: "Task 8", score: 9 },
-    { task: "Task 9", score: 10 },
-    { task: "Task 10", score: 10 },
-    { task: "Task 11", score: 10 },
-    { task: "Task 12", score: 10 },
-    { task: "Task 13", score: 9 },
-    { task: "Task 14", score: 10 },
-    { task: "Task 15", score: 10 },
-    { task: "Task 16", score: 10 },
-    { task: "Task 17", score: 9 },
-    { task: "Task 18", score: 10 },
-    { task: "Task 19", score: 10 },
-    { task: "Task 20", score: 9 },
-    { task: "Task 21", score: 10 },
-    { task: "Task 22", score: 10 },
-    { task: "Task 23", score: 10 },
-    { task: "Task 25", score: 10 },
-    { task: "Task 26", score: 9 },
-    { task: "Task 27", score: 10 },
-    { task: "Task 28", score: 10 },
-    { task: "Task 29", score: 9 },
-  ];
-
- 
-    // Select a random task from the default data
-    const randomTask = faker.Math.round(Math.random() * 10).arrayElement(defaultData);
-
-    // Return the score for the selected task
-   
-
-  // Return generated data
-  return { codeKataScores, webKataScores ,randomTask,interviewMarks,capstoneMarks,webCodeMarks};
+  return {
+    taskMarks,
+    interviewMarks,
+    webCodeMarks,
+    capstoneMarks,
+    codeKataScores,
+    webKataScores,
+  };
 }
+
 export const saveRandomTaskMarksForUsers=async(req,res)=> {
     try {
         // Retrieve users from the database (assuming you already have users)
