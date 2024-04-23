@@ -12,9 +12,9 @@ const userSchema = mongoose.Schema({
   codeKataScores: [{ day: String, score: Number }],
   webKataScores: [{ day: String, score: Number }],
   taskMarks: [{ task: String, score: Number }],
-  interviewMarks: Number,
-  capstoneMarks:  Number,
-  webCodeMarks:  Number, 
+  interviewMarks: { type: Number, default: 0 },
+  capstoneMarks: { type: Number, default: 0 },
+  webCodeMarks: { type: Number, default: 0 }
 });
 const user = mongoose.model('user',userSchema)
 export default user
