@@ -207,8 +207,10 @@ export const saveRandomTaskMarksForUsers=async(req,res)=> {
             // Save user with updated marks
             await user.save();
             console.log(`Random task marks saved for user: ${user.username}`);
+            res.status(200).json({ message: user });
         }
     } catch (error) {
         console.error('Error saving random task marks:', error);
+         res.status(500).json({ message: "Internal server error" });
     }
   }
