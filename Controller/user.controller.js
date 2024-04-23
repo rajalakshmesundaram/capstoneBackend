@@ -132,7 +132,7 @@ export const getUserById = async (req, res) => {
 
 function generateRandomData() {
   // Generate random data
-  const tasks = Array.from({ length: 29 }, (_, index) => ({
+  const taskMarks = Array.from({ length: 29 }, (_, index) => ({
     task: `Task ${index + 1}`,
     score: Math.round(Math.random() * 10),
   }));
