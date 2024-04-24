@@ -12,6 +12,6 @@ router.get('/getalluser/:userId',getalluser)
 router.post('/getMarks/:id',marksById)
 router.get("/getusermarks/:userId",getUserById);
 router.get("/randomuserdata/:userId",saveRandomTaskMarksForUsers)
-router.post('/getcapstone/:userId',capstoneMarksById)
-router.post('/getwebcode/:userId',webcodeMarksById)
+router.post('/getcapstone/:id',capstoneMarksById)
+router.post('/getwebcode/:id',webcodeMarksById)
 export default router
