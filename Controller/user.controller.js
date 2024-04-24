@@ -187,3 +187,35 @@ export const saveRandomTaskMarksForUsers=async(req,res)=> {
          res.status(500).json({ message: "Internal server error" });
     }
 }
+export const capstoneMarksById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { frontsmarks, backsmarks, frontdmarks, backdmarks } = req.body;
+    const userMarks = await user.findById(id);
+    userMarks.capfrontsmarks = frontsmarks;
+    userMarks.capbacksmarks = backsmarks;
+    userMarks.capfrontdmarks = frontdmarks;
+    userMarks.capbackdmarks = backdmarks;
+
+    await userMarks.save();
+    res.status(200).json({ message: userMarks });
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+export const webcodeMarksById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { frontsmarks, backsmarks, frontdmarks, backdmarks } = req.body;
+    const userMarks = await user.findById(id);
+    userMarks.webfrontsmarks = frontsmarks;
+    userMarks.webbacksmarks = backsmarks;
+    userMarks.webfrontdmarks = frontdmarks;
+    userMarks.webbackdmarks = backdmarks;
+
+    await userMarks.save();
+    res.status(200).json({ message: userMarks });
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

@@ -1,5 +1,5 @@
 import express from 'express'
-import { createUser, forgotPassword, getUser, getUserById, getalluser, loginUser, marksById, resetpassword, saveRandomTaskMarksForUsers } from '../Controller/user.controller.js'
+import { capstoneMarksById, createUser, forgotPassword, getUser, getUserById, getalluser, loginUser, marksById, resetpassword, saveRandomTaskMarksForUsers, webcodeMarksById } from '../Controller/user.controller.js'
 import { authmiddleware } from '../Middleware/auth.middleware.js'
 const router=express.Router()
 
@@ -12,4 +12,6 @@ router.get('/getalluser/:userId',getalluser)
 router.post('/getMarks/:id',marksById)
 router.get("/getusermarks/:userId",getUserById);
 router.get("/randomuserdata/:userId",saveRandomTaskMarksForUsers)
+router.post('/getcapstone/:userId',capstoneMarksById)
+router.post('/getwebcode/:userId',webcodeMarksById)
 export default router
