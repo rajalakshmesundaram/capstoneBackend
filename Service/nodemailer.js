@@ -11,7 +11,7 @@ const mail = (UserName,token) => {
     from: "rajalakshmesundaram@gmail.com",
     to: UserName,
     subject: "login msg",
-    html: `<p>Click the following link to reset your password: <a href="https://zenclassstudentdashboard2024.netlify.app/resetpassword/${token}">Reset Password</a></p>`,
+    html: `<p>Click the following link to reset your password: <a href="https://studentdashboard2024.netlify.app/resetpassword/${token}">Reset Password</a></p>`,
   };
   mailTransporter.sendMail(details, (error) => {
     if (error) {
